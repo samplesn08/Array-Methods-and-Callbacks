@@ -26,6 +26,7 @@ hint - you should be looking at the stage key inside of the objects
 
 function getFinals(data) {
    const finalArray = data.filter(item => item.Stage === 'Final');
+   console.log(finalArray);
    return finalArray;
 }
 
@@ -52,13 +53,12 @@ Use the higher-order function getWinners to do the following:
 
 function getWinners(array, callback) {
     const winners = [];
-    const home = callback(array).map(item => item.[6]);
-    const away = callback(array).map(item => item.[7]);
-    if (home[1] > away[1]) {
-        winners.push(home[0])
-    } else {
-        winners.push(away.[0])
+    if ((callback(array).map(item => item.['Home Team Goals'])) > (callback(array).map(item => item.['Away Team Goals']))) {
+        winners.push(callback(array).map(item => item.['Home Team Name']));
+    } else if ((callback(array).map(item => item.['Home Team Goals'])) < (callback(array).map(item => item.['Away Team Goals']))) {
+        winners.push(callback(array).map(item => item.['Away Team Name']));
     }
+    return winners;
 }
 
 
